@@ -40,17 +40,18 @@ fdisk /dev/nvme0n1
 
 Make boot file system:
 ```
-# mkfs.fat F32 /dev/nvme0n1p1
+# mkfs.fat -F32 /dev/nvme0n1p1
+```
+
+Make swap parition:
+```
+# mkswap /dev/nvme0n1p2
+# swapon /dev/nvme0n1p2
 ```
 
 Make file system for `/`:
 ```
 # mkfs.ext4 /dev/nvme0n1p3
-```
-Make swap parition:
-```
-# mkswap /dev/nvme0n1p2
-# swapon /dev/nvme0n1p2
 ```
 
 Mount the partition for installation:
