@@ -37,6 +37,12 @@ Create:
 ```
 fdisk /dev/nvme0n1
 ```
+
+Make boot file system:
+```
+# mkfs.fat F32 /dev/nvme0n1p1
+```
+
 Make file system for `/`:
 ```
 # mkfs.ext4 /dev/nvme0n1p3
@@ -54,7 +60,7 @@ Mount the partition for installation:
 
 Install base packages:
 ```
-# pacstrap /mnt base linux linux-firmware inter-ucode
+# pacstrap /mnt base linux linux-firmware intel-ucode
 ```
 
 Generate `fstab` file:
@@ -122,9 +128,42 @@ Enter the following:
 ::1             localhost
 127.0.1.1       myhost.localdomain    myhost
 ```
+Set root password:
+```
+# passwd
+```
 
+## D. Install Bootloader
+13:18
 
+Get required packages
+```
+# pacman -S grub efibootmgr os-prober mtools dosfstools
+```
+Initialize the boot partition
+```
+# mkdir /boot/EFI
+# mount /dev/nvme0n1p1 /boot/EFI
+```
+
+Install grub
+```
+# grub-install --target=x86_64-efi --efi-directory=/boot/EFI --bootloader-id=GRUB --recheck
+```
+
+```
+# grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+```
+# exit
+```
+
+```
+# genfstab -U /mnt >> /mnt/etc/fstab
+```
 
 Missing packages:
-git base-devel dialog wpa_supplicant linux-headers
+git base-devel dialog linux-headers networkmanaer network-manager-applet wpa-suplicant wireless_tools openssh
+
 
