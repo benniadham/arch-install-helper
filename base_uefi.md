@@ -24,4 +24,8 @@ Update font cache and then set for to a larger size:
 # fc-cache -fv
 # setfont ter-v32b
 ```
+### 3. Synchronize Time 
+```
+# timedatectl set-ntp true
+```
 
