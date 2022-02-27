@@ -47,5 +47,41 @@ Make swap parition:
 # swapon /dev/nvme0n1p2
 ```
 
+Mount the partition for installation:
+```
+# mount /dev/nvme0n1p3 /mnt
+```
 
+Install base packages:
+```
+# pacstrap /mnt base linux linux-firmware inter-ucode
+```
+
+Generate `fstab` file:
+```
+# genfstab -U /mnt >> /mnt/etc/fstab
+```
+
+Check the fstab:
+```
+# cat /mnt/etc/fstab
+```
+
+## C. Installation
+
+```
+# arch-chroot /mnt
+```
+Set the timezone:
+```
+# ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
+# hwclock --systohc
+```
+Check the date and time:
+```
+# date
+```
+
+Missing packages:
+git base-devel dialog wpa_supplicant linux-headers
 
