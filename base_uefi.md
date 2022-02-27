@@ -68,19 +68,62 @@ Check the fstab:
 ```
 
 ## C. Installation
-
+### 1. Setup
 ```
 # arch-chroot /mnt
 ```
-Set the timezone:
+
+### 2 Set the timezone
+Select timezone
+```
+# tzselect
+```
+Set your timezone:
 ```
 # ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
-# hwclock --systohc
+```
+Synch time:
+```
+# hwclock --systohc --utc
 ```
 Check the date and time:
 ```
 # date
 ```
+
+Install an editor:
+```
+pacman -S nano
+```
+
+Edit /etc/locale.gen: uncomment en_US.UTF-8 (Or locale of you choice)
+```
+# nano /etc/locale.gen
+```
+Generate locale:
+```
+# locale-gen
+```
+Edit locale.conf:
+```
+# echo LANG=en_US.UTF-8 > /etc/locale.conf
+```
+Set hostname:
+```
+# echo my_hostname > /etc/hostname
+```
+Edit hosts:
+```
+# nano /etc/hosts
+```
+Enter the following:
+```
+127.0.0.1       localhost
+::1             localhost
+127.0.1.1       myhost.localdomain    myhost
+```
+
+
 
 Missing packages:
 git base-devel dialog wpa_supplicant linux-headers
