@@ -28,4 +28,24 @@ Update font cache and then set for to a larger size:
 ```
 # timedatectl set-ntp true
 ```
+## Set Partition
+Delete:
+```
+fdisk /dev/nvme0n1
+```
+Create:
+```
+fdisk /dev/nvme0n1
+```
+Make file system for `/`:
+```
+# mkfs.ext4 /dev/nvme0n1p3
+```
+Make swap parition:
+```
+# mkswap /dev/nvme0n1p2
+# swapon /dev/nvme0n1p2
+```
+
+
 
