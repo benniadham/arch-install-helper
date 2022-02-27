@@ -1,2 +1,1 @@
-# arch-install-helper
-Arch Linux Installation Helper
+# Arch Linux Installation Helper
